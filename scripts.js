@@ -272,10 +272,10 @@ getProducts();
 function getProducts() {
     let products_html = document.getElementById('products');
 
-    let data='';
+    let data = '';
     for (let i = 0; i < products.length; i++) {
-        data+=
-        `
+        data +=
+            `
         <div class="col mb-5">
         <div class="card h-100">
             <!-- Sale badge-->
@@ -290,12 +290,8 @@ function getProducts() {
                     <h5 class="fw-bolder">${products[i].title}</h5>
                     <!-- Product reviews-->
                     <div class="d-flex justify-content-center small text-warning mb-2">
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        //bu hissesi heleki qalir(udlzu meselesi)
+                      
+                       ${generateRating(products[i].rating.rate)}
                     </div>
                     <p>  </p>
                     <!-- Product price-->
@@ -311,9 +307,25 @@ function getProducts() {
         </div>
     </div>
         `
-     
-        
+
+
     }
-    products_html.innerHTML=data;
+    products_html.innerHTML = data;
+
+}
+
+function generateRating(rate) {
+    let filledStarts = Math.round(rate);
+    let data = '';
+    for (let i = 0; i < filledStarts; i++) {
+        data += '<div class="bi-star-fill"></div>';
+    }
+
+    let emptyStars = 5 - filledStarts;
+    for (let i = 0; i < emptyStars; i++) {
+        data += '<div class="bi-star"></div>';
+    }
+
+    return data;
 
 }
